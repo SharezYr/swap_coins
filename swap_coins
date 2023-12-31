@@ -1,0 +1,59 @@
+import tkinter as tk
+from web3 import Web3
+
+def swap_coins():
+    # Получаем значения из полей ввода
+    private_key = private_key_entry.get()
+    coin_from = coin_from_entry.get()
+    coin_to = coin_to_entry.get()
+    amount = amount_entry.get()
+
+    # Подключаемся к сети Ethereum
+    w3 = Web3(Web3.HTTPProvider('https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY'))
+    if w3.isConnected():
+        # Получаем адрес кошелька из приватного ключа
+        account = w3.eth.account.from_key(private_key)
+        wallet_address = account.address
+        print(f"Адрес кошелька: {wallet_address}")
+
+        # Ваш код для выполнения свапа с использованием API
+        # Например:
+        # execute_swap(coin_from, coin_to, amount, w3)
+        
+        # Выводим результат выполнения свапа
+        result_label.config(text="Свап выполнен!")
+    else:
+        result_label.config(text="Ошибка подключения к сети Ethereum")
+
+# Создаем графический интерфейс
+root = tk.Tk()
+root.title("Свапалка")
+
+# Создаем и размещаем виджеты
+private_key_label = tk.Label(root, text="Приватный ключ:")
+private_key_label.pack()
+private_key_entry = tk.Entry(root)
+private_key_entry.pack()
+
+coin_from_label = tk.Label(root, text="Монета для свапа:")
+coin_from_label.pack()
+coin_from_entry = tk.Entry(root)
+coin_from_entry.pack()
+
+coin_to_label = tk.Label(root, text="Монета на свап:")
+coin_to_label.pack()
+coin_to_entry = tk.Entry(root)
+coin_to_entry.pack()
+
+amount_label = tk.Label(root, text="Количество монет:")
+amount_label.pack()
+amount_entry = tk.Entry(root)
+amount_entry.pack()
+
+swap_button = tk.Button(root, text="Выполнить свап", command=swap_coins)
+swap_button.pack()
+
+result_label = tk.Label(root, text="")
+result_label.pack()
+
+root.mainloop()
