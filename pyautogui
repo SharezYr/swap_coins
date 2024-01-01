@@ -1,0 +1,19 @@
+import pyautogui
+import time
+
+# Задаем количество кликов
+num_clicks = 10
+
+# Задаем временной интервал между кликами в секундах
+click_interval = 2
+
+try:
+    for i in range(num_clicks):
+        # Выполняем клик мыши
+        pyautogui.click()
+
+        # Ждем заданное количество секунд перед следующим кликом
+        time.sleep(click_interval)
+
+except KeyboardInterrupt:
+    print("\nПрерывание скрипта")
